@@ -24,6 +24,8 @@ It uses uplift modeling to predict the **incremental impact of sending an email*
 ## 🖼️ Dashboard Preview
 
 ![Dashboard Screenshot]("static\Dashboard Screenshot.png")
+<img width="577" height="324" alt="Dashboard Screenshot" src="https://github.com/user-attachments/assets/352c2fd2-a4b9-4af8-bfdb-cdea8ac7d02d" />
+
 
 > 📌 Add your screenshot in:  
 > `static/screenshots/dashboard.png`
