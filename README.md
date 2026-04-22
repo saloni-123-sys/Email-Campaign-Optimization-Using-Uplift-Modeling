@@ -1,0 +1,47 @@
+# 📧 UpliftIQ – Email Campaign Optimization using Uplift Modeling
+
+UpliftIQ is an AI-powered web application that helps businesses optimize their email marketing campaigns by identifying the right customers to target.  
+It uses uplift modeling to predict the **incremental impact of sending an email**, enabling smarter and more profitable decisions.
+
+---
+
+## 🚀 Features
+
+- 🎯 Predict customer uplift score  
+- 👥 Smart customer segmentation:
+  - Persuadable
+  - Sure Thing
+  - Lost Cause
+  - Do Not Disturb  
+- 📊 A/B Test Analysis (Control vs Treatment)  
+- 📈 Conversion & Revenue comparison  
+- 🧠 AI-based decision recommendation (Send / Skip / Avoid)  
+- 🌙 Dark Mode UI  
+- 📜 Prediction history tracking  
+
+---
+
+## 🖼️ Dashboard Preview
+
+![Dashboard Screenshot]("static\Dashboard Screenshot.png")
+
+> 📌 Add your screenshot in:  
+> `static/screenshots/dashboard.png`
+
+---
+
+
+
+---
+
+## ⚙️ Tech Stack
+
+- 🐍 Python  
+- 🌐 Flask  
+- 📊 Pandas, NumPy  
+- 🤖 Scikit-learn  
+- 🎨 HTML, CSS, JavaScript  
+
+---
+
+## 📂 Project Structure
