@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="theme-toggle">🌙</div>
+
+  <a href="/" class="back-btn">⬅</a>
+
+  <div class="logo">📧 UpliftIQ</div>
+
+  <a href="/dashboard">🏠 Dashboard</a>
+  <a href="/predict_page">➕ New Prediction</a>
+  <a href="/abtest">🧪 A/B Test</a>
+  <a href="/history" class="active">📊 History</a>
+  <a href="/about">ℹ️ About</a>
+  <a href="/logout">🚪 Logout</a>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h2>📊 Prediction History</h2>
+    <span class="badge blue">Total: {{ data|length }}</span>
+  </div>
+
+  <!-- SUMMARY CARDS -->
+  <div class="grid">
+
+    <div class="card">
+      <h3>Total Predictions</h3>
+      <h2>{{ data|length }}</h2>
+    </div>
+
+    <div class="card">
+      <h3>High Value (Persuadable)</h3>
+      <h2>
+        {{ data | selectattr(1, 'equalto', 'Persuadable') | list | length }}
+      </h2>
+    </div>
+
+  </div>
+
+  <!-- TABLE -->
+  <div class="card" style="margin-top:20px;">
+
+    {% if data %}
+
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Uplift Score</th>
+          <th>Segment</th>
+          <th>Decision</th>
+        </tr>
+      </thead>
+
+      <tbody>
+      {% for row in data %}
+      <tr>
+        <td>{{ loop.index }}</td>
+
+        <!-- Score -->
+        <td><b>{{ row[0] }}</b></td>
+
+        <!-- Segment -->
+        <td>
+          {% if row[1] == 'Persuadable' %}
+            <span class="badge green">Persuadable</span>
+          {% elif row[1] == 'Sure Thing' %}
+            <span class="badge blue">Sure Thing</span>
+          {% elif row[1] == 'Lost Cause' %}
+            <span class="badge red">Lost Cause</span>
+          {% else %}
+            <span class="badge yellow">{{ row[1] }}</span>
+          {% endif %}
+        </td>
+
+        <!-- Decision -->
+        <td>
+          {% if row[2] == 'Send Email' %}
+            <span class="badge green">Send</span>
+          {% else %}
+            <span class="badge red">Do Not Send</span>
+          {% endif %}
+        </td>
+
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+    <!-- ACTION BUTTON -->
+    <div style="margin-top:15px; text-align:right;">
+      <a href="/predict_page">
+        <button>➕ New Prediction</button>
+      </a>
+    </div>
+
+    {% else %}
+
+    <!-- EMPTY STATE -->
+    <div class="empty-state">
+      <h3>No Predictions Yet 😶</h3>
+      <p>Your prediction history will appear here once you start analyzing customers.</p>
+      <a href="/predict_page">
+        <button>🚀 Create First Prediction</button>
+      </a>
+    </div>
+
+    {% endif %}
+
+  </div>
+
+  <!-- INSIGHTS -->
+  {% if data %}
+  <div class="card" style="margin-top:20px;">
+    <h3>📈 Insights</h3>
+
+    <p style="font-size:14px; color:#475569;">
+      Most of your customers fall under 
+      <b>
+        {{ data[0][1] if data else 'N/A' }}
+      </b> segment. 
+      Focus on targeting <b>Persuadable</b> customers to maximize campaign ROI.
+    </p>
+  </div>
+  {% endif %}
+
+</div>
+
+<!-- THEME TOGGLE -->
+<script>
+const toggle = document.querySelector(".theme-toggle");
+
+if(toggle){
+  if(localStorage.getItem("theme") === "dark"){
+    document.body.classList.add("dark");
+    toggle.innerHTML = "☀️";
+  }
+
+  toggle.onclick = () => {
+    document.body.classList.toggle("dark");
+
+    if(document.body.classList.contains("dark")){
+      toggle.innerHTML = "☀️";
+      localStorage.setItem("theme","dark");
+    } else {
+      toggle.innerHTML = "🌙";
+      localStorage.setItem("theme","light");
+    }
+  };
+}
+</script>
+
+</body>
+</html>

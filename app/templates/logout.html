@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Logout</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <div class="theme-toggle">🌙</div>
+    <div class="logo">📧 UpliftIQ</div>
+
+    <a href="/dashboard">🏠 Dashboard</a>
+    <a href="/predict_page">➕ New Prediction</a>
+    <a href="/history">📊 History</a>
+    <a href="/about">ℹ️ About</a>
+    <a class="active">🚪 Logout</a>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <div class="logout-container">
+
+        <div class="card logout-box">
+
+            <div class="logout-icon">🔓</div>
+
+            <h2>You have been logged out</h2>
+
+            <p class="subtitle">
+                Thank you for using UpliftIQ.<br>
+                You have been successfully logged out of your account.
+            </p>
+
+            <a href="/login">
+               <button>Go to Login Page</button>
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+<script>
+const toggle = document.querySelector(".theme-toggle");
+
+if(toggle){
+  toggle.onclick = () => {
+    document.body.classList.toggle("dark");
+
+    if(document.body.classList.contains("dark")){
+      toggle.innerHTML = "☀️";
+      localStorage.setItem("theme","dark");
+    } else {
+      toggle.innerHTML = "🌙";
+      localStorage.setItem("theme","light");
+    }
+  };
+
+  // load saved theme
+  if(localStorage.getItem("theme") === "dark"){
+    document.body.classList.add("dark");
+    toggle.innerHTML = "☀️";
+  }
+}
+</script>
+
+</body>
+</html>

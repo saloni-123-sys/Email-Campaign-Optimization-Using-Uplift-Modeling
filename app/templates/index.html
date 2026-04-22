@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>UpliftIQ</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <h2>📧 UpliftIQ</h2>
+
+  <div>
+    <span class="theme-toggle">🌙</span>
+
+    {% if session.get('user') %}
+      <span class="welcome">Welcome {{session['user']}}</span>
+      <a href="/logout">Logout</a>
+    {% else %}
+      <a href="/login">Login</a>
+      <a href="/signup" class="btn-nav">Signup</a>
+    {% endif %}
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+
+  <h1>Optimize Email Campaigns with AI</h1>
+
+  <p>
+    Identify the right customers, improve engagement, and maximize ROI 
+    using intelligent uplift modeling.
+  </p>
+
+  {% if session.get('user') %}
+    <a href="/dashboard"><button>🚀 Go to Dashboard</button></a>
+  {% else %}
+    <a href="/login"><button>🚀 Get Started Free</button></a>
+  {% endif %}
+
+</section>
+
+<!-- STATS SECTION -->
+<section class="stats">
+
+  <div class="stat-box">
+    <h2>+30%</h2>
+    <p>Conversion Increase</p>
+  </div>
+
+  <div class="stat-box">
+    <h2>-25%</h2>
+    <p>Marketing Cost</p>
+  </div>
+
+  <div class="stat-box">
+    <h2>Real-Time</h2>
+    <p>Predictions</p>
+  </div>
+
+  <div class="stat-box">
+    <h2>AI Powered</h2>
+    <p>Decision Engine</p>
+  </div>
+
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+
+  <h2>Why Choose UpliftIQ?</h2>
+
+  <div class="feature-grid">
+
+    <div class="feature-card">
+      <h3> Data-Driven Decisions</h3>
+      <p>Target only customers who are likely to respond positively.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3> Higher ROI</h3>
+      <p>Reduce marketing cost while improving conversion rate.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3> Smart Segmentation</h3>
+      <p>Classify users into Persuadable, Sure Thing, Lost Cause.</p>
+    </div>
+
+    <div class="feature-card">
+      <h3> Fast Predictions</h3>
+      <p>Instant insights powered by machine learning models.</p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+
+  <h2>How It Works</h2>
+
+  <div class="steps">
+
+    <div class="step">
+      <div class="circle">1</div>
+      <p>Enter Customer Data</p>
+    </div>
+
+    <div class="step">
+      <div class="circle">2</div>
+      <p>Model Predicts Behavior</p>
+    </div>
+
+    <div class="step">
+      <div class="circle">3</div>
+      <p>Calculate Uplift Score</p>
+    </div>
+
+    <div class="step">
+      <div class="circle">4</div>
+      <p>Take Smart Action</p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta">
+
+  <h2>Start Optimizing Your Campaigns Today </h2>
+
+  <p>Make smarter marketing decisions with AI-powered insights.</p>
+
+  {% if session.get('user') %}
+    <a href="/dashboard"><button>Go to Dashboard</button></a>
+  {% else %}
+    <a href="/signup"><button>Create Free Account</button></a>
+  {% endif %}
+
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p>© 2026 UpliftIQ | Built with ❤️ using Flask</p>
+</footer>
+
+<!-- THEME TOGGLE -->
+<script>
+const toggle = document.querySelector(".theme-toggle");
+
+if(toggle){
+
+  if(localStorage.getItem("theme") === "dark"){
+    document.body.classList.add("dark");
+    toggle.innerHTML = "☀️";
+  }
+
+  toggle.onclick = () => {
+    document.body.classList.toggle("dark");
+
+    if(document.body.classList.contains("dark")){
+      toggle.innerHTML = "☀️";
+      localStorage.setItem("theme","dark");
+    } else {
+      toggle.innerHTML = "🌙";
+      localStorage.setItem("theme","light");
+    }
+  };
+}
+</script>
+
+</body>
+</html>

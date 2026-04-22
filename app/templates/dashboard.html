@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+  <div class="theme-toggle">🌙</div>
+
+  <!-- TOP BACK BUTTON -->
+  <a href="/" class="back-btn">⬅</a>
+
+  <div class="logo">📧 UpliftIQ</div>
+
+  <a class="active">🏠 Dashboard</a>
+  <a href="/predict_page">➕ New Prediction</a>
+  <a href="/history">📊 History</a>
+  <a href="/about">ℹ️ About</a>
+  <a href="/logout">🚪 Logout</a>
+
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div>
+      <h2>Email Campaign Optimization</h2>
+      <p class="subtitle">Predict uplift score and get the best action for your customer.</p>
+    </div>
+    <div>Welcome, {{user}}</div>
+  </div>
+
+  <!-- TOP GRID -->
+  <div class="dashboard-grid">
+
+    <!-- CUSTOMER FORM -->
+    <div class="card">
+      <h3>👤 Customer Details</h3>
+
+      <form action="/predict" method="POST">
+
+        <label>Recency</label>
+        <input name="recency" placeholder="Months since last purchase">
+
+        <label>History</label>
+        <input name="history" placeholder="Total spend">
+
+        <label>Mens Spend</label>
+        <input name="mens" placeholder="e.g. 200">
+
+        <label>Womens Spend</label>
+        <input name="womens" placeholder="e.g. 450">
+
+        <button> Predict Uplift & Get Decision</button>
+
+      </form>
+    </div>
+
+    <!-- RESULT CARD -->
+    <div class="card">
+
+      <h3>📊 Prediction Result</h3>
+
+      <div class="result-main">
+        <p>Uplift Score</p>
+        <h2>{{score}}</h2>
+      </div>
+
+      <div class="result-details">
+
+  <p>
+    <b>Segment:</b>
+    <span class="badge 
+      {% if segment == 'Persuadable' %}green
+      {% elif segment == 'Sure Thing' %}blue
+      {% elif segment == 'Lost Cause' %}yellow
+      {% else %}red{% endif %}">
+      {{segment}}
+    </span>
+  </p>
+
+  <p><b>Decision:</b> {{decision}}</p>
+
+  <p><b>Treatment Prob:</b> {{treatment}}</p>
+  <p><b>Control Prob:</b> {{control}}</p>
+
+  <p>
+    <b>Confidence:</b>
+    <span class="badge 
+      {% if confidence == 'High' %}green
+      {% elif confidence == 'Medium' %}blue
+      {% else %}red{% endif %}">
+      {{confidence}}
+    </span>
+  </p>
+
+</div>
+
+<div class="result-msg">
+  {% if decision == "Send Email" %}
+    This customer is highly likely to convert if targeted.
+  {% elif decision == "Skip" %}
+    Email will not significantly impact this customer.
+  {% else %}
+    Avoid sending emails to prevent negative impact.
+  {% endif %}
+</div>
+
+    </div>
+
+  </div>
+
+  <!-- SEGMENT GUIDE -->
+  <div class="card segment-guide">
+
+    <h3>Segment Guide</h3>
+
+    <div class="segment-grid">
+
+      <div class="seg green-box">
+        <b>Persuadable</b>
+        <p>Will convert if emailed</p>
+        <small>Action: Send Email</small>
+      </div>
+
+      <div class="seg blue-box">
+        <b>Sure Thing</b>
+        <p>Will convert anyway</p>
+        <small>Action: Skip Email</small>
+      </div>
+
+      <div class="seg yellow-box">
+        <b>Lost Cause</b>
+        <p>Unlikely to convert</p>
+        <small>Action: Skip Email</small>
+      </div>
+
+      <div class="seg red-box">
+        <b>Do Not Disturb</b>
+        <p>May convert less if emailed</p>
+        <small>Action: Avoid Email</small>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<script>
+const toggle = document.querySelector(".theme-toggle");
+
+if(toggle){
+  toggle.onclick = () => {
+    document.body.classList.toggle("dark");
+
+    if(document.body.classList.contains("dark")){
+      toggle.innerHTML = "☀️";
+      localStorage.setItem("theme","dark");
+    } else {
+      toggle.innerHTML = "🌙";
+      localStorage.setItem("theme","light");
+    }
+  };
+
+  // load saved theme
+  if(localStorage.getItem("theme") === "dark"){
+    document.body.classList.add("dark");
+    toggle.innerHTML = "☀️";
+  }
+}
+</script>
+</body>
+</html>
