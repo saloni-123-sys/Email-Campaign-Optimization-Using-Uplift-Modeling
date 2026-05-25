@@ -20,8 +20,8 @@ app.secret_key = "secret123"
 # =========================
 # LOAD MODELS
 # =========================
-model_t = pickle.load(open(r"D:\MachineLearning_Project\Uplift Marketing Project\app\models\model_t.pkl","rb"))
-model_c = pickle.load(open(r"D:\MachineLearning_Project\Uplift Marketing Project\app\models\model_c.pkl","rb"))
+model_t = pickle.load(open(r"D:\MachineLearning_Project\Email Campaign Optimization Using Uplift Modeling\app\models\model_t.pkl","rb"))
+model_c = pickle.load(open(r"D:\MachineLearning_Project\Email Campaign Optimization Using Uplift Modeling\app\models\model_c.pkl","rb"))
 
 # =========================
 # DATABASE SETUP
@@ -165,8 +165,7 @@ def abtest():
     import pandas as pd
 
     # ✅ Step 1: Load data properly (important)
-    df = pd.read_csv(r"D:\MachineLearning_Project\Uplift\app\Kevin_Hillstrom_MineThatData_E-MailAnalytics_DataMiningChallenge_2008.03.20.csv")
-
+    df = pd.read_csv(r"D:\MachineLearning_Project\Email Campaign Optimization Using Uplift Modeling\app\data\Kevin_Hillstrom_MineThatData_E-MailAnalytics_DataMiningChallenge_2008.03.20.csv")
     # ✅ Step 2: Create treatment column safely
     df['treatment'] = df['segment'].apply(
         lambda x: 0 if str(x).strip().lower() == 'no e-mail' else 1
